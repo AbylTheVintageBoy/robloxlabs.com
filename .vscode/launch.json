@@ -1,0 +1,50 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Assets Tests",
+			"program": "${workspaceFolder}/Assemblies/Tests/Assets.js",
+			"request": "launch",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "pwa-node"
+		},
+		{
+			"name": "Persistent Data Store Tests",
+			"program": "${workspaceFolder}/Assemblies/Tests/PersistentDataStoreTests.js",
+			"request": "launch",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "pwa-node"
+		},
+		{
+			"name": "Fast Log Tests",
+			"program": "${workspaceFolder}/Assemblies/Tests/FastLogTests.js",
+			"request": "launch",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "pwa-node"
+		},
+		{
+			"name": "Fast Variable Tests",
+			"program": "${workspaceFolder}/Assemblies/Tests/FastVariableTests.js",
+			"request": "launch",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "pwa-node"
+		},
+		{
+			"name": "Service Client Log Tests",
+			"program": "${workspaceFolder}/Assemblies/Tests/ServiceClientTests.js",
+			"request": "launch",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "pwa-node"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Roblox.IStart.Job-for-vsc",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": ["run-script", "Roblox.IStart.Job-for-vsc"],
+			"envFile": "${workspaceFolder}/.env"
+		}
+	],
+	"compounds": []
+}
