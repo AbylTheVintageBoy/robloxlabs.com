@@ -1,8 +1,8 @@
 /*
-	FileName: LoadPlaceInfo.ashx.ts
+	FileName: __pageIndex.ts
 	Written By: Nikita Nikolaevich Petko
 	File Type: Module
-	Description: Load Place info script
+	Description: The index page for /
 			
 	All commits will be made on behalf of mfd-co to https://github.com/mfd-core/sitetest4.robloxlabs.com
 
@@ -25,23 +25,46 @@
 	***
 */
 
-import a from 'axios';
+import { Request, Response } from 'express';
+import { RobloxLegacy } from '../../Api';
+import { PointsClient } from '../../ApiClients/Roblox.Points.Client/Implementation/PointsClient';
+import { ICustomError } from '../../Platform/ErrorModels/Roblox.Platform.ErrorModels/CustomError';
+import { Errors } from '../../Web/Util/Roblox.Web.Util/Errors';
 
+/**
+ * This needs to be a controller, because it's checking the status
+ */
+
+// TODO: In the future, we should try and validate whether or not the apiService is alive, for services
+// For this particular api, ping https://points.api.sitetest4.robloxlabs.com/checkhealth and check if the response is 200 or not
 export default {
 	method: 'all',
-	func: async (_req, res) => {
-		if (_req.method === 'OPTIONS') return res.send();
-		a.get('https://points.roblox.com' + _req.url, {
-			headers: { ..._req.headers, host: 'points.roblox.com' },
-		})
-			.then((re) => {
-				const newheaders = JSON.parse(JSON.stringify(re.headers).split('roblox.com').join('sitetest4.robloxlabs.com'));
-
-				return res.header(newheaders).send(re.data);
-			})
-			.catch((e) => {
-				const newheaders = JSON.parse(JSON.stringify(e.response.headers).split('roblox.com').join('sitetest4.robloxlabs.com'));
-				return res.header(newheaders).status(e.response.status).send(e.response.data);
+	func: async (req: Request, res: Response) => {
+		if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
+			let cookie = req.headers.cookie;
+			if (cookie === undefined) cookie = '';
+			cookie = (cookie as string).split(';').find((AuthToken) => {
+				return AuthToken.startsWith(' .ROBLOSECURITY') || AuthToken.startsWith('.ROBLOSECURITY');
 			});
+			if (cookie) cookie = cookie.split('=')[1];
+			if (!RobloxLegacy.Api.Helpers.Helpers.Sessions.CreateOrGetXsrfSession(cookie, req.ip, req.headers['x-csrf-token'], res, false))
+				return;
+		}
+		const [Success, StatusCode, StatusMessage, Url] = await PointsClient.CheckHealth(req.secure);
+		if (Success && StatusCode === 200) {
+			return res.send({ message: 'OK' });
+		}
+		const customErrors: ICustomError[] = [
+			{
+				code: <number>StatusCode,
+				message:
+					StatusCode > 0
+						? StatusMessage.toString()
+						: `Error checking health for Roblox.Points.Service:\r\n   \tStatus Code: ${StatusMessage} (${
+								StatusCode || 'None'
+						  })\r\n   \tUrl: ${Url}\r\n   \tResponse Machine Id: None`,
+			},
+		];
+		return Errors.RespondWithCustomErrors(<number>StatusCode || 503, customErrors, res, true);
 	},
 };

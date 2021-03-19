@@ -1,8 +1,8 @@
 /*
-	FileName: all-time.ts
-	Written By: comrade
+	FileName: _P-userId.ts
+	Written By: Nikita Nikolaevich Petko
 	File Type: Module
-	Description: Points API set point amount.
+	Description: Gets a user's all-time points balance from an universe.
 			
 	All commits will be made on behalf of mfd-co to https://github.com/mfd-core/sitetest4.robloxlabs.com
 
@@ -25,74 +25,57 @@
 	***
 */
 
-// Request example:
 /*
 
-# Request
-GET /v1/universes/:id/users/:id/ HTTP/1.1
+GET /v1/universe/{universeId}/users/{userId} HTTP/1.1
+Host: points.sitetest4.robloxlabs.com
 
+*/
 
+// Implementation:
+// Method: GET
+// Requires HTTPS: Yes
+// Uses ApiService: Yes
 
-
-###
- */
-
-
-import { Request, Response } from 'express-serve-static-core';
-import dotenv from 'dotenv';
-import { Roblox } from '../../../../../../../Api';
-import { GetPoints } from '../../../../../../../Helpers/WebHelpers/Points/Get';
+import { Request, Response } from 'express';
 import { FASTFLAG, FFlag } from '../../../../../../../Helpers/WebHelpers/Roblox.Util/Roblox.Util.FastLog';
-
-dotenv.config({ path: Roblox.Api.Constants.RobloxDirectories.__iBaseDirectory + '\\.env' });
+import { GetAllTimePointBalanceResponse } from '../../../../../../../Models/Roblox.Points.Api/GetAllTimePointBalanceResponse';
+import { ICustomError } from '../../../../../../../Platform/ErrorModels/Roblox.Platform.ErrorModels/CustomError';
+import { PointsRequestProcessor } from '../../../../../../../Web/Points/Roblox.Web.Points/PointsRequestProcessor';
+import { Errors } from '../../../../../../../Web/Util/Roblox.Web.Util/Errors';
 
 FASTFLAG('RequireGlobalHTTPS');
 export default {
-	method: 'All',
-	func: async (request: Request, response: Response): Promise<Response<unknown> | void> => {
-    	if (request.method === 'OPTIONS') return response.status(200).send();
-        if (FFlag['RequireGlobalHTTPS'] && request.protocol !== 'https') {
-            return response.status(403).send({
-                errors: [
-                    {
-                        code: 0,
-                        message: 'HTTPS Required.',
-                    }
-                ],
-            })
-        }
-        let uId = parseInt(request.params['universeId'])
-		let usId = parseInt(request.params['userId'])
-        if (isNaN(usId)) {
-            return response.status(404).send({
-                errors: [
-                    {
-                        code: 1,
-                        message: 'The universe is invalid.',
-                    }
-                ],
-            })
-        } else if (isNaN(uId)) {
-            return response.status(404).send({
-                errors: [
-                    {
-                        code: 2,
-                        message: 'The user is invalid.',
-                    }
-                ],
-            })
-        }
-
-
-        
-        let e = {}
-		const [success, result] = await GetPoints(uId, usId)
-		if (success) {
-			e["allTimeScore"]=result
-		} else {
-			e["allTimeScore"]=0
+	method: 'all', //Allow all methods but validate the method in the request itself
+	func: async (request: Request, response: Response<GetAllTimePointBalanceResponse>) => {
+		const errors: ICustomError[] = [];
+		if (FFlag['RequireGlobalHTTPS'] && request.protocol !== 'https') {
+			errors.push({
+				code: 0,
+				message: 'HTTPS Required',
+			});
+			return Errors.RespondWithCustomErrors(403, errors, response, true);
 		}
-		return response.status(200).send(JSON.stringify(e))
-		
+
+		// OPTIONS should already be validated by now
+		if (request.method !== 'GET') {
+			errors.push({
+				code: 0,
+				message: `The requested resource does not support http method '${request.method}'.`,
+			});
+			return Errors.RespondWithCustomErrors(405, errors, response, true);
+		}
+
+		const universeId = parseInt(<string>request.params.universeId);
+		const userId = parseInt(<string>request.params.userId);
+
+		const [IsValidInputs, universe, user] = PointsRequestProcessor.CheckUniverseAndUser(universeId, userId, response);
+		if (!IsValidInputs) return;
+
+		const [Success, , Response, Error] = await PointsRequestProcessor.GetUserAllTimePoints(universe, user);
+		if (!Success) {
+			return Errors.RespondWithAHttpError(response, Error);
+		}
+		response.send({ allTimeScore: Response.allTimeScore });
 	},
 };

@@ -2,7 +2,7 @@
 /// <reference types="node" />
 import { IStartup as IStartupImport } from './SDK/IStartupSDK';
 import { ClientSettings as ClientSettingsImport } from './Helpers/WebHelpers/Roblox.Util/Roblox.Util.ClientSettings';
-export declare namespace Roblox {
+export declare namespace RobloxLegacy {
     namespace Api {
         namespace Library {
             const IStartup: typeof IStartupImport;
@@ -462,6 +462,7 @@ export declare namespace Roblox {
                 ROBLOX_AB_TESTING_API: string;
                 ADMIN_WEB_SITE: string;
                 COM_APIS: string;
+                ROBLOX_POINTS_API: string;
             };
         }
     }
