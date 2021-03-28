@@ -1,9 +1,9 @@
 {
 	"ChangeUsernameEnabled": true,
 	"IsAdmin": true,
-	"UserId": 2,
-	"Name": "ROBLOX",
-	"DisplayName": "nsg is coolio",
+	"UserId": 1,
+	"Name": "nsg",
+	"DisplayName": "US- user_1",
 	"IsEmailOnFile": true,
 	"IsEmailVerified": true,
 	"IsPhoneFeatureEnabled": true,
@@ -17,7 +17,7 @@
 	"IsSetPasswordNotificationEnabled": false,
 	"ChangePasswordRequiresTwoStepVerification": false,
 	"ChangeEmailRequiresTwoStepVerification": false,
-	"UserEmail": "n*****@roblox.com",
+	"UserEmail": "a**@roblox.com",
 	"UserEmailMasked": true,
 	"UserEmailVerified": true,
 	"CanHideInventory": true,
@@ -51,7 +51,7 @@
 		"IsEmailVerified": true,
 		"IsTwoStepEnabled": true,
 		"ShowSignOutFromAllSessions": true,
-		"TwoStepVerificationViewModel": { "UserId": 2, "IsEnabled": true, "CodeLength": 0, "ValidCodeCharacters": null }
+		"TwoStepVerificationViewModel": { "UserId": 1, "IsEnabled": true, "CodeLength": 0, "ValidCodeCharacters": null }
 	},
 	"ApiProxyDomain": "https://api.sitetest4.robloxlabs.com",
 	"AccountSettingsApiDomain": "https://accountsettings.sitetest4.robloxlabs.com",
@@ -83,6 +83,6 @@
 	"IsFastTrackAccessible": false,
 	"HasFreeNameChange": false,
 	"IsAgeDownEnabled": true,
-	"IsDisplayNamesEnabled": false,
+	"IsDisplayNamesEnabled": true,
 	"ReceiveNewsletter": false
 }
