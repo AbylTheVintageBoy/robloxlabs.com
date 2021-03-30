@@ -10,5 +10,30 @@
 		"missing-module-return",
 		"unknown-symbol",
 		"undefined-global"
-	]
+	],
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		".eslintignore": true,
+		".eslintrc": true,
+		".github": true,
+		".gitignore": true,
+		".prettierignore": true,
+		".prettierrc": true,
+		".vscode": true,
+		"/Assemblies": true,
+		"CONTRIBUTING.md": true,
+		"LICENSE": true,
+		"node_modules": true,
+		"package-lock.json": true,
+		"README.md": true,
+		"tsconfig.json": true,
+		"webpack.config.js": true,
+		"**/*.js": true,
+		"Assemblies/bin": true
+	},
+	"explorerExclude.backup": null
 }

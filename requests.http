@@ -795,20 +795,44 @@ roblox-machine-id: AWA-WEB671
 
 
 ###
-
-POST accountsettings.roblox.com/v1/app-chat-privacy HTTP/1.1
+POST https://gamejoin.roblox.com/v1/team-create HTTP/1.1
+Content-Type: application/json
 x-csrf-token: u3qdH0ofasoB
-user-agent: Roblox/ApiServiceClient 4.8.4210.0 (https://www.sitetest2.robloxlabs.com+1.2)
-content-type: application/json
-cookie: .ROBLOSECURITY=_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_;
-roblox-proxied-ip: 128.116.77.126
+user-agent: Roblox/Linux
+cookie: .ROBLOSECURITY=_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_1F076F685900A05E808DBA782A52AA5E20A763D19A65C312FA8D5DA139652F44EA8EF253A90BF2B6DFD6EC61DCF86DC9DE0DF4EA100B049AF2185C9F24456E48E00A08796A50CCE94196F307EDFCB39250F623F912973C1680DFF64217400DC180307A56F06CAD2BC6EE6FB1122749D010E62F8D4C5949D8CB9C72EDAA587A3CB83FB1024FB3A60E7137DD220E16D9074A824053C5139246B36F98C671A6A1B7BE99F843C106DDE4D0CD3B6ADC7CA673ED5924B570CA98E3F84D86A2557133686D8F2657B544F7568851DAD1EE83D0F47DAB83E18323F8567637348F4DC7D921924AFCB8B762FB005C4443498A1099B244D3AF34712F37CF0D390643BCA063CC7810CFA51E8317EE165F774E94B9C6C588A77274AC68D1CAFFC7DBBDB7DB4351FA0F2586
+Roblox-Grid-Proxied-IP: 128.116.77.126
 roblox-proxied-locale: en-us
 roblox-security-token: ljWby+/HVsZXJLfRkoljWby+/HVsZXJLfRko9mPQ9mPQ==
 roblox-machine-id: AWA-WEB671
-roblox-api-key: 2A04B993-BC10-40AB-B34D-E9FB80CCB34D
-requester: Client
+Roblox-Api-Key: 2A04B993-BC10-40AB-B34D-E9FB80CCB34D
+requester: Server
+X-Roblox-Is-ApiRequest: true
+X-Roblox-ChannelType: Roblox.Http.ServiceClient.Channel.Main
 
-{"\/": someThingThatDoesNotExist}
+{
+  "placeId": 5565011975,
+  "gamerTag": "noob",
+  "isPartyLeader": true,
+  "isPlayTogetherGame": true,
+  "browserTrackerId": 1,
+  "isTeleport": false
+}
+
+###
+GET https://yfn87fhgfa.execute-api.us-east-1.amazonaws.com/Debug HTTP/1.1
+x-csrf-token: u3qdH0ofasoB
+user-agent: Roblox/Linux
+content-type: application/json
+cookie: .ROBLOSECURITY=_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_1F076F685900A05E808DBA782A52AA5E20A763D19A65C312FA8D5DA139652F44EA8EF253A90BF2B6DFD6EC61DCF86DC9DE0DF4EA100B049AF2185C9F24456E48E00A08796A50CCE94196F307EDFCB39250F623F912973C1680DFF64217400DC180307A56F06CAD2BC6EE6FB1122749D010E62F8D4C5949D8CB9C72EDAA587A3CB83FB1024FB3A60E7137DD220E16D9074A824053C5139246B36F98C671A6A1B7BE99F843C106DDE4D0CD3B6ADC7CA673ED5924B570CA98E3F84D86A2557133686D8F2657B544F7568851DAD1EE83D0F47DAB83E18323F8567637348F4DC7D921924AFCB8B762FB005C4443498A1099B244D3AF34712F37CF0D390643BCA063CC7810CFA51E8317EE165F774E94B9C6C588A77274AC68D1CAFFC7DBBDB7DB4351FA0F2586
+Roblox-Grid-Proxied-IP: 128.116.77.126
+roblox-proxied-locale: en-us
+roblox-security-token: ljWby+/HVsZXJLfRkoljWby+/HVsZXJLfRko9mPQ9mPQ==
+roblox-machine-id: AWA-WEB671
+Roblox-Api-Key: 2A04B993-BC10-40AB-B34D-E9FB80CCB34D
+requester: Server
+X-Roblox-Is-ApiRequest: true
+X-Roblox-ChannelType: Roblox.Http.ServiceClient.Channel.Main
+X-Api-Key: ODY5ZDc1ZTc4YmU2MTQ1Yjc1ZDgwNTAzOTgxMTE3NjcyMzAxM2U3NjY0ZGEyMDMyYzE2ZDZhZGUwYmIyNzc5NGZkZDQzZDU1NmI3MTFmOGJjNTVmM2NkNzgxMGVmODA3
 
 ###
 
@@ -818,7 +842,7 @@ PUT https://userads.api.sitetest3.robloxlabs.com/GetUsersAds
 ###
 
 
-GET sitetest1.robloxlabs.com
+GET https://clientsettings.roblox.qq.com/v1/settings/secured-settings-internal?applicationName=RCCService
 User-Agent: sads/Linux
 cookie: .ROBLOSECURITY=*
 Roblox-Proxied-Ip: 128.116.77.22

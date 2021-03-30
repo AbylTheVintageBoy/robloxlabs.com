@@ -4,8 +4,7 @@ import { DFLog, DYNAMIC_LOGVARIABLE, FASTLOGS } from '../Helpers/WebHelpers/Robl
 import { ServiceClient } from '../Http/ServiceClient/HttpClient';
 import { ServiceClientExceptions } from '../Http/ServiceClient/HttpException';
 import { HttpRequestMethodEnum } from '../Http/ServiceClient/HttpRequestMethodEnum';
-import ssl from 'sslkeylog';
-ssl.hookAll();
+
 
 DYNAMIC_LOGVARIABLE('Debug', 7);
 

@@ -4,7 +4,7 @@
 	"description": "mfd",
 	"main": "Assemblies/bin/Global.asax.js",
 	"scripts": {
-		"Roblox-IStart-Job": "node --no-deprecation --no-warnings --report-filename=server.log --diagnostic-dir=Diagnostiscs Assemblies/bin/Global.asax.js",
+		"Roblox-IStart-Job": "node --no-deprecation --no-warnings --report-filename=server.log  Assemblies/bin/Global.asax.js",
 		"lint": "eslint . --fix --ext .ts",
 		"Roblox.Global.asax-for-vsc": "npm run build && npm run Roblox-IStart-Job",
 		"build": "tsc --skipLibCheck",
@@ -48,7 +48,6 @@
 		"request-promise": "^4.2.6",
 		"serve-index": "^1.9.1",
 		"spdy": "^4.0.2",
-		"sslkeylog": "^0.2.2",
 		"ws": "^7.4.2",
 		"xml-js": "^1.6.11"
 	}

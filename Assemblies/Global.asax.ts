@@ -70,9 +70,7 @@ import { DefaultAsp404 } from './ErrorResponders/aspError404';
 import { Points } from './MiddleWare/Points';
 import { PointsApi } from './MiddleWare/PointsApi';
 import { ApiServiceIsAliveValidator } from './MiddleWare/ApiServiceIsAliveValidator';
-import ssl from 'sslkeylog';
 import { User } from './Platform/Membership/User';
-ssl.hookAll();
 
 LOGVARIABLE('GumePersistince', 6);
 LOGVARIABLE('TheAdminsPog', 6);

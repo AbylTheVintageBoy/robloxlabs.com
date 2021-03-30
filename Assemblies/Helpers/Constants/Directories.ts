@@ -26,6 +26,6 @@
 */
 
 // Base Directory, why is it here? I don't know it's a const helper of some sort
-export const _dirname = 'C:\\buildAgent\\work\\0800fc577294c34f';
+export const _dirname = 'C:\\Users\\Aiden\\Downloads\\rslbs\\rlbs';
 // This contains some certs and private keys for SiteTest4, none being used as of 2018
 export const _sslname = _dirname + '\\SSL';
