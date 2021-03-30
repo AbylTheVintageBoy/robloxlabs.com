@@ -12,11 +12,6 @@
 		"undefined-global"
 	],
 	"files.exclude": {
-		"**/.git": true,
-		"**/.svn": true,
-		"**/.hg": true,
-		"**/CVS": true,
-		"**/.DS_Store": true,
 		".eslintignore": true,
 		".eslintrc": true,
 		".github": true,
@@ -24,16 +19,20 @@
 		".prettierignore": true,
 		".prettierrc": true,
 		".vscode": true,
+		"**/.DS_Store": true,
+		"**/.git": true,
+		"**/.hg": true,
+		"**/.svn": true,
+		"**/CVS": true,
 		"/Assemblies": true,
+		"Assemblies/bin": true,
 		"CONTRIBUTING.md": true,
 		"LICENSE": true,
 		"node_modules": true,
 		"package-lock.json": true,
 		"README.md": true,
 		"tsconfig.json": true,
-		"webpack.config.js": true,
-		"**/*.js": true,
-		"Assemblies/bin": true
+		"webpack.config.js": true
 	},
 	"explorerExclude.backup": null
 }
