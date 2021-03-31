@@ -851,3 +851,9 @@ Roblox-Game-Id: *
 RCC-Committer-User-Id: *
 RCC-Autosave: *
 RCC-Save-User-Id: *
+###
+POST https://ephemeralcounters.api.sitetest4.robloxlabs.com/v1.1/Counters/BatchIncrement?apiKey=76E5A40C-3AE1-4028-9F10-7C62520BD94F HTTP/1.1
+Content-Type: application/json
+roblox-security-token: ljWby+/HVsZXJLfRkoljWby+/HVsZXJLfRko9mPQ9mPQ==
+
+{"BootstrapperFetchFileClientSettingsCdnSuccess":1}
