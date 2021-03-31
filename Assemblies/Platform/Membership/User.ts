@@ -119,7 +119,7 @@ export class User implements IUser {
 		await db.Disconnect();
 		return user;
 	}
-	public static async GetByUserPass(Username: string, Password: string): Task<IUser> {
+	public static async GetByPassword(Username: string, Password: string): Task<IUser> {
 		// TODO: Do some extra checking here!
 		const db = new PartialDataBase('RobloxMembership', 'root', 'Io9/9DEF');
 		const [didConnect, err] = await db.Connect();

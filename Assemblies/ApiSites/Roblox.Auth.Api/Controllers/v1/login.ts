@@ -35,7 +35,7 @@ export default {//TODO: FIX PARAMETERS
 	func: async (_req, res) => {
 		let user = _req.query['name'];
 		let pass = _req.query['pass'];
-		let e = await User.GetByUserPass(user, pass);
+		let e = await User.GetByPassword(user, pass);
 		if (e == null) {
 			return res.status(403).send();
 		}
