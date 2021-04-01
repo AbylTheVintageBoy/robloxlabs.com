@@ -1,5 +1,5 @@
 import { IEmail } from '../Credentials/IEmail';
-import { IPassword } from '../Credentials/IPassword';
+//import { IPassword } from '../Credentials/IPassword';
 import { UserModelBuildersClubMembershipTypeEnum } from './UserModelBuildersClubMembershipTypeEnum';
 export interface IUser {
 	/*Int64*/ Id: Number;
@@ -8,8 +8,10 @@ export interface IUser {
 	/*UserModelBuildersClubMembershipTypeEnum*/ MembershipType: UserModelBuildersClubMembershipTypeEnum;
 	/*String*/ SecurityToken: String;
 	/*String*/ Description: String;
-	/*IPassword*/ Password: IPassword;
+	/*IPassword*/ Password: String;
 	/*String*/ Created: String;
+	/*String*/ Updated: String;
+
 	/*Boolean*/ IsBanned: Boolean;
 	/*IEmail*/ Email: IEmail;
 	/*Boolean*/ HasPasswordSet: Boolean;
@@ -25,4 +27,5 @@ export interface IUser {
 	/*Boolean*/ IsPremium: Boolean;
 	/*Boolean*/ ChangeUsernameEnabled: Boolean;
 	/*Boolean*/ IsAdmin: Boolean;
+
 }

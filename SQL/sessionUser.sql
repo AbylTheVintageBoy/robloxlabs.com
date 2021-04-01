@@ -1,4 +1,4 @@
-CREATE TABLE `sessionuser` (
+CREATE TABLE `RobloxMembership`.`sessionuser` (
   `Id` bigint NOT NULL AUTO_INCREMENT,
   `IpAddress` text NOT NULL,
   `LanguageCode` text NOT NULL,
