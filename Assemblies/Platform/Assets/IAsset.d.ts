@@ -6,7 +6,7 @@ declare namespace Roblox.Platform.Assets {
 		public CreatorType: Roblox.Platform.Core.CreatorType;
 		public CreatorTargetId: System.Int64;
 		public AssetGenres: System.Int64;
-		public IsArchived: Roblox.Platform.SQLBoolean;
+		public Archived: Roblox.Platform.SQLBoolean;
 		public Updated: System.DateTime;
 		public Created: System.DateTime;
 

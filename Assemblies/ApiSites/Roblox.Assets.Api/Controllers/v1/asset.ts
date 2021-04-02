@@ -26,12 +26,19 @@
 */
 
 // import a from 'axios';
-import { Response } from 'express';
+import { Request, Response } from 'express';
+import { RobloxLegacy } from "../../../../Api"
+import { Asset } from "../../../../Platform/Assets/Asset"
+import fs from 'fs';
+
 
 export default {
 	method: 'all',
-	func: async (_req: { method: string; url: string; headers: any }, res: Response) => {
-		if (_req.method === 'OPTIONS') return res.send();
-		res.redirect('https://assetdelivery.roblox.com' + _req.url);
+	func: async (_req: Request, res: Response) => {
+		if (!isNaN(parseInt(_req.query.id as any))) {
+			const hash = await Asset.recieveHash(parseInt(_req.query.id as any))
+			let asset = fs.readFileSync(RobloxLegacy.Api.Constants.RobloxDirectories.__iBaseDirectory + "/Default/" + hash)
+			return res.status(200).send(asset)
+		}
 	},
 };

@@ -7,13 +7,10 @@ There is a few things you will need to do before you can use this.
 3. SQL Setup, for this project, it uses MySQL, you will be able to use regular MySQL, and PHPMyAdmin etc. For the Tables, you can look in the [SQL](./SQL) folder to see the CREATE commands for each table, procedure and function. Look at this folder often, as new tables, procedures and functions will be added regularly as the project progresses.
 4. And finally, the cerificate for the HTTPS server. ALl you need to do here is install the certificate inside of [SSL](./SSL) (Named ST4.crt). When installing this, you will have the option for installing it for the current user only, or the current machine, if you only want to be available for the current user, then install it to the current user, else install it the machine. The next option you will need to select is '`Place all certificates in the following store`', in the '`Certificate store:`' section, paste the following in: '`Trusted Root Certification Authorities`', this store is where all certificates are installed from trusted providers, such as if you go to google.com, and you have never receieved the certificate for it, it will automatically get installed to the 'Trusted Root Certification Authorities' store. The reason you have to install the certificate manually, is because it is a self-signed certificate without a CA. (Note: Everytime this certificate updates, you will need to re-do this).
 
-# Potential Issues.
+This repo is for the things that are too unstable to be on the repo for things that are too unstable.
 
-There will be potential issues that you encounter while using this. The most common ones will include the SSLKEYLOGFILE and your hosts file. Some issues you may encounter with your hosts file may include is '`EADDRNOTAVAIL`', this is when the address is already being used, to fix this, for every update to this repository, you will need to replace the contents of your HostsFile with the contents of the <b>[hosts.txt](./hosts.txt)</b> file in this repository. Another issue can be '`EACCES: permission denied`', this mostly occurs on port `80` when hosting the HTTP servers, it is most likely a conflict issue with another service and that port/ip, you can always go to your hosts file, and change the IP that was failing.
-
----
-
-Any additional issues, open an issue if you do not have a solution for it, or open a pull request if you do have a solution for it.
+KNOWN ISSUES:
+	assets with the same name will not work properly.
 
 Have fun! <br>
 \- **nsg**<br>

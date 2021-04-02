@@ -10,7 +10,7 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 	public CreatorType: Roblox.Platform.Core.CreatorType;
 	public CreatorTargetId: System.Int64;
 	public AssetGenres: System.Int64;
-	public IsArchived: Roblox.Platform.SQLBoolean;
+	public Archived: Roblox.Platform.SQLBoolean;
 	public Updated: System.DateTime;
 	public Created: System.DateTime;
 
@@ -25,7 +25,7 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 			return null;
 		}
 		const [, , assets] = db.GetTable<Roblox.Platform.Assets.IAsset>('asset', 'Id', true);
-		const [success, message, result] = await assets.SelectKeysWhere(['TypeId', 'Name', 'Description', 'CreatorType', 'CreatorTargetId', 'AssetGenres', 'IsArchived', 'Updated','Created', 'Id', 'CurrentAVID'], {
+		const [success, message, result] = await assets.SelectKeysWhere(['TypeId', 'Name', 'Description', 'CreatorType', 'CreatorTargetId', 'AssetGenres', 'Archived', 'Updated','Created', 'Id', 'CurrentAVID'], {
 			Key: 'Id',
 			Condition: PartialDatabaseConditionType.Equal,
 			Value: Id,
@@ -43,7 +43,7 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 		newAsset.CreatorType = <Roblox.Platform.Core.CreatorType>thisSession.Data[3].Value;
 		newAsset.CreatorTargetId = <number>thisSession.Data[4].Value;
 		newAsset.AssetGenres = <number>thisSession.Data[5].Value;
-		newAsset.IsArchived = <Roblox.Platform.SQLBoolean>thisSession.Data[6].Value;
+		newAsset.Archived = <Roblox.Platform.SQLBoolean>thisSession.Data[6].Value;
 		newAsset.Updated = <System.DateTime>thisSession.Data[7].Value;
 		newAsset.Created = <System.DateTime>thisSession.Data[8].Value;
 		newAsset.Id = <number>thisSession.Data[9].Value;
@@ -62,6 +62,8 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 			FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] Error when fetching asset: %s', err);
 			return null;
 		}
+		FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] desc: %s', Description);
+
 		const [, , assets] = db.GetTable<Roblox.Platform.Assets.IAsset>('asset', 'Id', true);
 			const [s, m] = await assets.InsertValues([
 			{ Key: "Name", Value: Name },
@@ -71,7 +73,7 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 			FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] Error when creating asset: %s', m);
 
 		}
-		const [success, message, result] = await assets.SelectKeysWhere(['TypeId', 'Name', 'Description', 'CreatorType', 'CreatorTargetId', 'AssetGenres', 'IsArchived', 'Updated', 'Created', 'Id', 'CurrentAVID'], {
+		const [success, message, result] = await assets.SelectKeysWhere(['TypeId', 'Name', 'Description', 'CreatorType', 'CreatorTargetId', 'AssetGenres', 'Archived', 'Updated', 'Created', 'Id', 'CurrentAVID'], {
 			Key: 'Name',
 			Condition: PartialDatabaseConditionType.Equal,
 			Value: Name,
@@ -89,7 +91,7 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 		newAsset.CreatorType = <Roblox.Platform.Core.CreatorType>thisSession.Data[3].Value;
 		newAsset.CreatorTargetId = <number>thisSession.Data[4].Value;
 		newAsset.AssetGenres = <number>thisSession.Data[5].Value;
-		newAsset.IsArchived = <Roblox.Platform.SQLBoolean>thisSession.Data[6].Value;
+		newAsset.Archived = <Roblox.Platform.SQLBoolean>thisSession.Data[6].Value;
 		newAsset.Updated = <System.DateTime>thisSession.Data[7].Value;
 		newAsset.Created = <System.DateTime>thisSession.Data[8].Value;
 		newAsset.Id = <number>thisSession.Data[9].Value;
@@ -103,11 +105,11 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 			FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] Error when fetching asset: %s', err);
 			return null;
 		}
-		const [, , assetsver] = db.GetTable<IAssetVersion>('asset', 'Id', true);
+		const [, , assetsver] = db.GetTable<IAssetVersion>('assetversions', 'Id', true);
 		const [, , assets] = db.GetTable<Roblox.Platform.Assets.IAsset>('asset', 'Id', true);
 
 		
-		const [success, message, ,] = await assets.SelectKeysWhere(['TypeId', 'Name', 'Description', 'CreatorType', 'CreatorTargetId', 'AssetGenres', 'IsArchived', 'Updated', 'Created', 'Id', 'CurrentAVID'], {
+		const [success, message, ,] = await assets.SelectKeysWhere(['TypeId', 'Name', 'Description', 'CreatorType', 'CreatorTargetId', 'AssetGenres', 'Archived', 'Updated', 'Created', 'Id', 'CurrentAVID'], {
 			Key: 'Id',
 			Condition: PartialDatabaseConditionType.Equal,
 			Value: Id,
@@ -146,5 +148,37 @@ export class Asset implements Roblox.Platform.Assets.IAsset {
 			FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] Error when creating asset: %s', m2);
 		}
 
+	}
+	public static async recieveHash(Id: number): Task<string> {
+		const db = new PartialDataBase('RobloxAssets', 'root', 'Io9/9DEF');
+		const [didConnect, err] = await db.Connect();
+		if (!didConnect) {
+			FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] Error when fetching asset: %s', err);
+			return null;
+		}
+		const [, , assetsver] = db.GetTable<IAssetVersion>('assetversions', 'Id', true);
+		const [, , assets] = db.GetTable<Roblox.Platform.Assets.IAsset>('asset', 'Id', true);
+		const [success, message, asset] = await assets.SelectKeysWhere(['TypeId', 'Name', 'Description', 'CreatorType', 'CreatorTargetId', 'AssetGenres', 'Archived', 'Updated', 'Created', 'Id', 'CurrentAVID'], {
+			Key: 'Id',
+			Condition: PartialDatabaseConditionType.Equal,
+			Value: Id,
+		});
+		if (!success) {
+			FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] Error when creating asset: %s', message);
+			return null;
+		}
+		const avid = asset.Rows[0].Data[10].Value;
+		const [s3, m3, r3] = await assetsver.SelectKeyWhere('Hash',
+			{
+				Key: 'Id',
+				Condition: PartialDatabaseConditionType.Equal,
+				Value: avid.toString()
+			}
+		)
+		if (!s3) {
+			FASTLOGS(DFLog('Tasks'), '[DFLog::Tasks] Error when creating asset: %s', m3);
+		}
+		const resHash = r3.Rows[0].Data[0].Value.toString();
+		return resHash;
 	}
 }
