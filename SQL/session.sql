@@ -3,8 +3,8 @@ CREATE TABLE `RobloxMembership`.`session` (
   `UserId` bigint NOT NULL,
   `SessionToken` text NOT NULL,
   `Location` enum('SignUp','Login') NOT NULL DEFAULT 'SignUp',
-  `UserAgent` text NOT NULL,
-  `Created` datetime NOT NULL,
+  `UserAgent` text,
+  `Created` datetime,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

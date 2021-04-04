@@ -77,6 +77,6 @@ export class Session implements ISession {
 			Condition: PartialDatabaseConditionType.Equal,
 			Value: Id,
 		});
-		return r.toString()
+		return r.Rows[0].Data[0].Value.toString()
 	}
 }
